@@ -1,0 +1,188 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">    
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+
+
+
+	<!-- NAV BAR -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">Stock Manager</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto mr-auto">
+        <li class="nav-item active mr-5">
+            <a class="nav-link " href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item ml-3">
+            <a class="nav-link" href="{% url 'product' %}">Products</a>
+        </li>
+        <li class="nav-item ml-3">
+            <a class="nav-link" href="{% url 'category' %}">Categories</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Item-In</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'orders' %}">Orders</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'list' %}">List</a>
+        </li>
+        </ul>
+        <!-- {% comment %} <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form> {% endcomment %} -->
+        {% if user.is_authenticated %}
+        <a class="nav-link mr-2" href="{% url 'logout' %}">Logout</a>
+        {% else %}
+        <a class="nav-link mr-2" href="{% url 'login' %}">Login</a>
+        {% endif %}
+        
+        
+    </div>
+    </nav>
+
+
+
+
+    <!-- BODY -->
+
+    <div class="container-fluid">
+    	<div class="row">
+    		<div class="col-md-2 bg-dark d-none d-md-block sidebar">
+    			<div class="sidebar-left">
+    				<ul class="nav flex-column sidebar-nav">
+
+                        <li class="nav-item  mt-3 mr-4 ml-3">
+                            <div class="side_nav_div">
+                            	<a class="nav-link active" href="{% url 'home' %}">
+                               	Overview
+                            
+                            </a>
+                            </div>
+                        </li>
+                        <li class="nav-item  mt-3 mr-4 ml-3">
+                            <div class="side_nav_div">
+                            	<a class="nav-link active" data-toggle="modal" data-target="#addproduct"  href="#addproduct">
+                               	Add Product
+                            
+                            </a>
+                            </div >
+                        </li>
+                        <li class="nav-item  mt-3 mr-4 ml-3">
+                            <div class="side_nav_div">
+                            	<a class="nav-link active" data-toggle="modal" data-target="#addcat"  href="#addcat">
+                               	Add Category
+                            
+                            </a>
+                            </div >
+                        </li>
+                        <li class="nav-item  mt-3 mr-4 ml-3">
+                            <div class="side_nav_div">
+                            	<a class="nav-link active" href="#">
+                               	Process Order
+                            
+                            </a>
+                            </div>
+                        </li>
+                        <li class="nav-item  mt-3 mr-4 ml-3">
+                            <div class="side_nav_div">
+                            	<a class="nav-link active" href="#">
+                               	
+                            
+                            </a>
+                            </div>
+                        </li>
+                    </ul>
+    			</div>
+    			
+    		</div>
+
+    		
+
+    		<!-- MAIN -->
+
+    		<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    			{% block main %}
+                {% endblock main %}
+    		</main>
+
+
+            {% comment %} Add Product Modal {% endcomment %}
+            <div class="modal fade " id="addproduct" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Add Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="text-align: center;">
+                   {% comment %} form here {% endcomment %}
+                   Form Here
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save Product</button>
+                </div>
+                </div>
+            </div>
+            </div>
+
+
+
+            {% comment %} Add Category Modal {% endcomment %}
+            <div class="modal fade " id="addcat" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Add Category</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="text-align: center;">
+                   {% comment %} form here {% endcomment %}
+                   Form Here
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save Category</button>
+                </div>
+                </div>
+            </div>
+            </div>
+    	</div>
+    	
+    </div>
+
+
+
+
+
+
+
+    <script>
+	  $('#myModal').on('shown.bs.modal', function () {
+	  $('#myInput').trigger('focus')
+	})
+	</script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+</html>

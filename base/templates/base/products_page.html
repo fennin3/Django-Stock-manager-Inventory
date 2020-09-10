@@ -1,0 +1,40 @@
+{% extends 'base/layout.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block main %}
+
+	<h3 class="h3_head">Products</h3> 
+	<hr>
+	
+		<form id="searchForm" method="GET" class="mt-4">
+			{{productfilter.form|crispy}}
+			<input class="btn btn-primary mb-2" type="submit" value="search">
+		</form>
+		<div class="row ml-5 mr-5 mt-5">
+			{% for product in products %}
+			<div class="col-sm-3">
+				<div class="card shadow">
+				<div class="card-body">
+					<h5 class="card-title">{{product.name}}</h5>
+					<small>Category --> {{product.category}}</small><br>
+					<small class="card-text">Cost Price --> Ghc {{product.cost_price}}</small><br>
+					<small class="card-text">Selling Price --> Ghc {{product.selling_price}}</small><br>
+					<small class="card-text">Status --> <span style="color: green; font-weight: bold;">{{product.status}}</span></small><br>
+					<small class="card-text">Quantity --> {{product.quantity}}</small><br>
+					<hr>
+					<!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+					<input type="text" name="add" style="width: 40px; height: 20px;">  + Add Product <br>
+					<input type="text" name="remove" style="width: 40px; height: 20px;">  - Remove Product
+				</div>
+				</div>
+			</div>
+	
+			{% endfor %}
+	
+		</div>   
+	
+
+{% endblock main %}
+
+

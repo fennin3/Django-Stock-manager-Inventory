@@ -1,0 +1,47 @@
+.sidebar {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	z-index: 100;
+	padding: 200px 0 0 10px;
+	border-right: 1px solid black;
+
+}
+
+.sidebar-left{
+	position: sticky;
+	top: 0;
+	height: calc(100vh-70px);
+}
+
+.sidebar-nav li .nav-link{
+	color: white;
+	font-weight: 500;
+	font-size: 20px;
+}
+
+nav{
+	font-size: 20px;
+}
+
+.sidebar-nav li .side_nav_div:hover{
+	background-color: grey;
+
+	border-radius: 15px;
+}
+
+main{
+	padding-top: 90px;
+}
+
+main .card{
+	margin-bottom: 40px;
+}
+
+a{
+	color: white;
+}
+
+.h3_head{
+	text-align: center;
+}

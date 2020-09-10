@@ -1,0 +1,88 @@
+{% extends 'base/layout.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block main %}
+
+	<h3 class="h3_head">Categories</h3> 
+	<hr>
+	
+		<form id="searchForm" method="GET" class="mt-4">
+			{{categoryfilter.form|crispy}}
+			<input class="btn btn-primary mb-2" type="submit" value="search">
+		</form>
+		
+	<div class="row ml-5 mr-5 mt-5">
+	{% for cat in categories %}
+	
+		<div class="col-sm-2">
+	    <div class="card shadow">
+	      <div class="card-body">
+	        <h5 class="card-title">{{cat.name}}</h5>
+	        <p class="card-text">Products --> {{noc}}</p>
+	        <a href="#" class="btn btn-primary">Go somewhere</a>
+	      </div>
+	    </div>
+	  </div>
+	
+	{% endfor %}
+	  
+	  {% comment %} <div class="col-sm-2">
+	    <div class="card shadow">
+	      <div class="card-body">
+	        <h5 class="card-title">Special title treatment</h5>
+	        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+	        <a href="#" class="btn btn-primary">Go somewhere</a>
+	      </div>
+	    </div>
+	  </div>
+	  <div class="col-sm-2">
+	    <div class="card shadow">
+	      <div class="card-body">
+	        <h5 class="card-title">Special title treatment</h5>
+	        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+	        <a href="#" class="btn btn-primary">Go somewhere</a>
+	      </div>
+	    </div>
+	  </div>
+	  <div class="col-sm-2">
+	    <div class="card shadow">
+	      <div class="card-body">
+	        <h5 class="card-title">Special title treatment</h5>
+	        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+	        <a href="#" class="btn btn-primary">Go somewhere</a>
+	      </div>
+	    </div>
+	  </div>
+	  <div class="col-sm-2">
+	    <div class="card shadow">
+	      <div class="card-body">
+	        <h5 class="card-title">Special title treatment</h5>
+	        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+	        <a href="#" class="btn btn-primary">Go somewhere</a>
+	      </div>
+	    </div>
+	  </div>
+	  <div class="col-sm-2">
+	    <div class="card shadow">
+	      <div class="card-body">
+	        <h5 class="card-title">Special title treatment</h5>
+	        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+	        <a href="#" class="btn btn-primary">Go somewhere</a>
+	      </div>
+	    </div>
+	  </div>
+	  <div class="col-sm-2">
+	    <div class="card shadow">
+	      <div class="card-body">
+	        <h5 class="card-title">Special title treatment</h5>
+	        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+	        <a href="#" class="btn btn-primary">Go somewhere</a>
+	      </div>
+	    </div>
+	  </div> {% endcomment %}
+	</div>   
+
+{% endblock main %}
+
+
