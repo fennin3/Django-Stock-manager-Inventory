@@ -1,0 +1,22 @@
+{% extends 'base/layout.html' %}
+{% load crispy_forms_tags %}
+
+    
+    {% block main %}
+        
+        <h3 class="h3_head">Add Product</small></h3> 
+        <hr>
+        <form method="POST" action="" class="m-5 card shadow">
+        {% csrf_token %}
+        <fieldset class=" p-4 border form-group">
+            {% comment %} <legend class="border-bottom mb-2" style="text-align: center;"><b>Join Today</b></legend> {% endcomment %}
+    
+            <div class="form-group">
+                {{form|crispy}}
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Save</button>
+            
+        </fieldset>
+    </form>
+    {% endblock main %}}

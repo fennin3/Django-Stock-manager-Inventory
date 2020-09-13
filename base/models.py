@@ -13,12 +13,14 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    
     
 
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True )
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True, related_name='products')
     code = models.CharField(max_length=100)
     quantity = models.IntegerField(default=1)
     cost_price = models.DecimalField(decimal_places=2, default=0.00, max_digits=3)
@@ -28,6 +30,26 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def add_quantity(self, n):
+        return int(self.quantity) + int(n)
+       
+
+    def remove_quantity(self, n):
+        if int(self.quantity) > 0 and int(self.quantity) >= int(n):
+            return int(self.quantity) - int(n)
+        else:
+            return self.quantity
+
+    def get_status(self):
+        if self.quantity >0:
+            
+            return True
+        else:
+       
+            return False
+        
+
     
 
 

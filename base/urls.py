@@ -10,6 +10,13 @@ urlpatterns = [
     path('categories/',views.category, name="category"),
     path('login/', auth_views.LoginView.as_view(template_name='base/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='base/home.html'), name='logout'),
+    path('add-product/',views.prodadd_request, name="addprod"),
+    path('add-category/',views.catadd_request, name="addcat"),
+    path('products/deleted/<int:id>/', views.proddelete_request, name="proddelete"),
+    path('products/delete-confirm/<int:id>/', views.proddeleteconfirm, name="prodconfirm"),
+    path('products/addquantity/<int:id>/', views.add_prod_quantity, name="addquan"),
+    path('products/removequantity/<int:id>/', views.sub_prod_quantity, name="subquan"),
+    path('products/edit/<int:id>/', views.edit_product, name="editproduct")
 
 
 ]

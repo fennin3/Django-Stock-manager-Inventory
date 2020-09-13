@@ -4,7 +4,7 @@
 
 {% block main %}
 
-	<h3 class="h3_head">Categories</h3> 
+	<h3 class="h3_head">Categories <small>( {{noc}} Categories )</small></h3> 
 	<hr>
 	
 		<form id="searchForm" method="GET" class="mt-4">
@@ -19,68 +19,15 @@
 	    <div class="card shadow">
 	      <div class="card-body">
 	        <h5 class="card-title">{{cat.name}}</h5>
-	        <p class="card-text">Products --> {{noc}}</p>
-	        <a href="#" class="btn btn-primary">Go somewhere</a>
+	        <p class="card-text">Products -> {{cat.products.all.count}}</p>
+	        <p class="card-text">Code -> {{cat.code}}</p>
+			
 	      </div>
 	    </div>
 	  </div>
 	
 	{% endfor %}
 	  
-	  {% comment %} <div class="col-sm-2">
-	    <div class="card shadow">
-	      <div class="card-body">
-	        <h5 class="card-title">Special title treatment</h5>
-	        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-	        <a href="#" class="btn btn-primary">Go somewhere</a>
-	      </div>
-	    </div>
-	  </div>
-	  <div class="col-sm-2">
-	    <div class="card shadow">
-	      <div class="card-body">
-	        <h5 class="card-title">Special title treatment</h5>
-	        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-	        <a href="#" class="btn btn-primary">Go somewhere</a>
-	      </div>
-	    </div>
-	  </div>
-	  <div class="col-sm-2">
-	    <div class="card shadow">
-	      <div class="card-body">
-	        <h5 class="card-title">Special title treatment</h5>
-	        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-	        <a href="#" class="btn btn-primary">Go somewhere</a>
-	      </div>
-	    </div>
-	  </div>
-	  <div class="col-sm-2">
-	    <div class="card shadow">
-	      <div class="card-body">
-	        <h5 class="card-title">Special title treatment</h5>
-	        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-	        <a href="#" class="btn btn-primary">Go somewhere</a>
-	      </div>
-	    </div>
-	  </div>
-	  <div class="col-sm-2">
-	    <div class="card shadow">
-	      <div class="card-body">
-	        <h5 class="card-title">Special title treatment</h5>
-	        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-	        <a href="#" class="btn btn-primary">Go somewhere</a>
-	      </div>
-	    </div>
-	  </div>
-	  <div class="col-sm-2">
-	    <div class="card shadow">
-	      <div class="card-body">
-	        <h5 class="card-title">Special title treatment</h5>
-	        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-	        <a href="#" class="btn btn-primary">Go somewhere</a>
-	      </div>
-	    </div>
-	  </div> {% endcomment %}
 	</div>   
 
 {% endblock main %}

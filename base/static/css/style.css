@@ -45,3 +45,15 @@ a{
 .h3_head{
 	text-align: center;
 }
+
+.proddiv{
+	position: relative;
+}
+
+.prodicon{
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	right: 30px;
+	top: 20px;
+}

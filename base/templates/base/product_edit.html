@@ -1,0 +1,12 @@
+{% extends 'base/layout.html' %}
+{% load crispy_forms_tags %}
+
+{% block main %}
+		<h3 class="h3_head">Update {{prod.name}}</small></h3> 
+        <hr>
+    <form class="mr-5 ml-5 shadow p-3" method="POST" action="">
+    	{% csrf_token %}
+    	{{form|crispy}}
+    	<button type="submit" class="btn btn-primary"> Update</button>
+    </form>
+{% endblock main %}
