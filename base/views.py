@@ -1,9 +1,10 @@
 from django.shortcuts import render, HttpResponse, redirect, HttpResponseRedirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Product, Category
+from .models import Product, Category, Item, Order
 from .filters import ProductFilter, CategoryFilter
 from .forms import ProductAddForm, CategoryAddForm
+from django.utils import timezone
 
 
 @login_required
@@ -103,6 +104,10 @@ def add_prod_quantity(request, id):
         prod.save()
 
         return redirect('product')
+    
+        
+
+
 
 def sub_prod_quantity(request, id):
     prod = get_object_or_404(Product, id=id)
@@ -112,7 +117,34 @@ def sub_prod_quantity(request, id):
         prod.quantity = prod.remove_quantity(n)
         prod.save()
 
-        return redirect('product')
+        item , created = Item.objects.get_or_create(
+            item=prod,
+            user=request.user,
+            quantity=n
+        )
+
+        order_qs = Order.objects.filter(
+            user=request.user,
+            ordered=False
+        )
+
+        if order_qs.exists():
+            order = order_qs[0]
+
+            if order.items.filter(item__id=id).exists():
+                item.quantity += n
+                item.save()
+                return redirect('product')
+            else:
+                order.items.add(item)
+                return redirect('product')
+        else:
+            ordered_date = timezone.now()
+            order = Order.objects.create(user=request.user, ordered_date=ordered_date)
+            order.items.add(item)
+            return redirect('product')
+
+        
     
 def edit_product(request, id):
     prod = get_object_or_404(Product, id=id)
@@ -129,5 +161,4 @@ def edit_product(request, id):
         'form':form
     }
     return render(request, 'base/product_edit.html', context)
-
 

@@ -1,4 +1,5 @@
 {% load static %}
+{% load cart_template_tags %}
 
 <!DOCTYPE html>
 <html>
@@ -39,7 +40,7 @@
             <a class="nav-link" href="{% url 'orders' %}">Orders</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{% url 'list' %}">List</a>
+            <a class="nav-link" href="{% url 'list' %}"><i class="fas fa-truck ml-5" style="color: white;;">  {{ request.user|cart_item_count }}</i></a>
         </li>
         </ul>
         <!-- {% comment %} <form class="form-inline my-2 my-lg-0">
