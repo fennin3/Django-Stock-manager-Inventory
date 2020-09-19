@@ -24,13 +24,18 @@
 				    </div>
 				  </div>
 				</div>
+				
 				<div class="row">
 				  <div class="col-sm-6">
 				    <div class="card shadow">
 				      <div class="card-body">
 				        <h5 class="card-title">Category -- Info</h5>
-				        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-				        <a href="#" class="btn btn-primary">Go somewhere</a>
+				        {% if cat.count == 1 %}
+						<p class="card-text">{{cat.count}} Category</p>
+						{% else %}
+						<p class="card-text">{{cat.count}} Categories</p>
+						{% endif %}
+				        
 				      </div>
 				    </div>
 				  </div>
@@ -38,28 +43,11 @@
 				    <div class="card shadow">
 				      <div class="card-body">
 				        <h5 class="card-title">Product -- Info</h5>
-				        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-				        <a href="#" class="btn btn-primary">Go somewhere</a>
-				      </div>
-				    </div>
-				  </div>
-				</div>
-				<div class="row">
-				  <div class="col-sm-6">
-				    <div class="card shadow">
-				      <div class="card-body">
-				        <h5 class="card-title">Category -- Info</h5>
-				        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-				        <a href="#" class="btn btn-primary">Go somewhere</a>
-				      </div>
-				    </div>
-				  </div>
-				  <div class="col-sm-6">
-				    <div class="card shadow">
-				      <div class="card-body">
-				        <h5 class="card-title">Product -- Info</h5>
-				        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-				        <a href="#" class="btn btn-primary">Go somewhere</a>
+				        {% if prod.count == 1 %}
+						<p class="card-text">{{prod.count}} Product</p>
+						{% else %}
+						<p class="card-text">{{prod.count}} Products</p>
+						{% endif %}
 				      </div>
 				    </div>
 				  </div>

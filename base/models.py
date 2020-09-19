@@ -66,6 +66,11 @@ class Item(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     item = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
+    ordered = models.BooleanField(default=False)
+    
+
+    def add_quantity(self, n):
+        return int(self.quantity) + int(n)
     
 
 
@@ -78,7 +83,6 @@ class ItemsIn(models.Model):
     code = models.CharField(max_length=100)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     ordered_date = models.DateTimeField(auto_now_add=True)
-    ordered = models.BooleanField(default=False)
 
     def __str__(self):
         return self.user.username
@@ -93,4 +97,10 @@ class Order(models.Model):
 
     def __str__(self):
         return f"{self.user.username} order "
+
+
+class ItemsOut(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    item = models.ManyToManyField(Order)
+    ordered_date = models.DateField(auto_now_add=True)
 

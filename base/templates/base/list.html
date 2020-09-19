@@ -3,52 +3,28 @@
 
 {% block main %}
 
-<h4 class="h4_head">Orders Taken from the WareHouse</h4> 
+<h4 class="h4_head">Products to be ordered</h4> 
 <hr>
 <div class="row ml-5 mr-5 mt-5">
+  {% for item in order.items.all %}
+  <div class="col-sm-2">
+    <div class="card shadow" >
+      <div class="card-body">
+        <h5 class="card-title">{{item.item.name}}</h5>
+        <p class="card-text">Quantity -> {{item.quantity}}</p>       
+        <a href="{% url 'remove_from_order' item.id %}"><i class="fas fa-trash prodicon" style="color: red;"></i></a>
+      </div>
+    </div>
+  </div>
+  
+  {% endfor %}
+  
 
-  <div class="col-sm-4">
-    <div class="card shadow">
-      <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-       
-      </div>
-    </div>
-  </div>
-
-  <div class="col-sm-4">
-    <div class="card shadow">
-      <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-       
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-4">
-    <div class="card shadow">
-      <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-       
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-4">
-    <div class="card shadow">
-      <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-       
-      </div>
-    </div>
-  </div>
+  
+  
 
 </div>
-    
+
+<a href="{% url 'save_order' order.id %}"><button class="btn btn-primary shadow-lg  " style="margin-left: 60px;">Save Order</button></a>
+     
 {% endblock main %} 

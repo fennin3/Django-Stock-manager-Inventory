@@ -16,7 +16,15 @@ urlpatterns = [
     path('products/delete-confirm/<int:id>/', views.proddeleteconfirm, name="prodconfirm"),
     path('products/addquantity/<int:id>/', views.add_prod_quantity, name="addquan"),
     path('products/removequantity/<int:id>/', views.sub_prod_quantity, name="subquan"),
-    path('products/edit/<int:id>/', views.edit_product, name="editproduct")
+    path('products/edit/<int:id>/', views.edit_product, name="editproduct"),
+    path('categories/edit/<int:id>/', views.edit_category, name="editcategory"),
+    path('saved/<int:id>/', views.ordered, name="save_order"),
+    path("list/remove/<int:id>/", views.remove_from_order, name="remove_from_order"),
+    path("ordered/<int:id>/", views.order_detail, name="orderdetail"),
+    path("ordered/remove/<int:id>/", views.remove_from_ordered, name="remove_ordered"),
+    path('ordered/delete-confirm/<int:id>/', views.orderdeleteconfirm, name="orderconfirm"),
+    path('categories/delete-confirm/<int:id>/', views.cat_delete_confirm, name="delete_confirm"),
+    path("categories/delete/<int:id>/", views.catdelete, name="delete_cat"),
 
 
 ]

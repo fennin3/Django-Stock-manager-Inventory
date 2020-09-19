@@ -15,12 +15,22 @@
 	<div class="row ml-5 mr-5 mt-5">
 	{% for cat in categories %}
 	
-		<div class="col-sm-2">
+		<div class="col-sm-3">
 	    <div class="card shadow">
 	      <div class="card-body">
 	        <h5 class="card-title">{{cat.name}}</h5>
 	        <p class="card-text">Products -> {{cat.products.all.count}}</p>
 	        <p class="card-text">Code -> {{cat.code}}</p>
+        	{% comment %} <a href="{% url 'delete_confirm' cat.id %}"><i class="fas fa-trash prodicon" style="color: red;"></i></a> {% endcomment %}
+
+
+			<div class="prodicon mr-5">
+				<a href="{% url 'editcategory' cat.id %}"><i class="fas fa-edit" style="color: grey;"></i></a>
+			</div>
+			
+			<div class="prodicon">
+				<a href="{% url 'delete_confirm' cat.id %}"><i class="fas fa-trash" style="color: red;"></i></a>
+			</div>
 			
 	      </div>
 	    </div>

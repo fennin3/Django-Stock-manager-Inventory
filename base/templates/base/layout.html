@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
 </head>
-<body>
+<body style="background-color: #EAF0F1">
 
 
 
@@ -33,11 +33,9 @@
         <li class="nav-item ml-3">
             <a class="nav-link" href="{% url 'category' %}">Categories</a>
         </li>
+        
         <li class="nav-item">
-            <a class="nav-link" href="#">Item-In</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'orders' %}">Orders</a>
+            <a class="nav-link" href="{% url 'orders' %}">Ordered</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{% url 'list' %}"><i class="fas fa-truck ml-5" style="color: white;;">  {{ request.user|cart_item_count }}</i></a>
@@ -52,7 +50,6 @@
         {% else %}
         <a class="nav-link mr-2" href="{% url 'login' %}">Login</a>
         {% endif %}
-        
         
     </div>
     </nav>
@@ -118,6 +115,26 @@
     		<!-- MAIN -->
 
     		<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            {% if messages %}
+
+		
+			
+			{% for message in messages %}
+			<div class="alert alert-{{ message.tags }}" role="alert" style="text-align: center;">
+				{{ message }}
+				
+			</div>
+
+
+			{% endfor %}
+		
+				
+		</ul>
+
+
+
+		{% endif %}
+
     			{% block main %}
                 {% endblock main %}
     		</main>

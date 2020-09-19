@@ -1,0 +1,12 @@
+{% extends 'base/layout.html' %}
+{% load static %}
+
+{% block main %}
+<h5 style="margin-left: 40%;">Confirm Delete?</h5>
+<div style="margin-left: 42%; margin-top: 15px;">
+	<a href="{% url 'remove_ordered' order.id %}"><button class="btn btn-danger">Yes</button></a>
+	<a href="{% url 'orders' %}"><button class="btn btn-primary">No</button></a>
+</div>
+
+
+{% endblock main %}

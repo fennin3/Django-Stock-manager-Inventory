@@ -1,0 +1,28 @@
+{% extends 'base/layout.html' %}
+
+{% load static %}
+
+{% block main %}
+
+<h4>Ordered on {{order.ordered_date}}</h4>
+<hr>
+<h5>Ordered Products</h5>
+<div class="row ml-1 mr-5 mt-4">
+	{% for item in order.items.all %}
+    <div class="col-sm-2">
+    <div class="card shadow">
+      <div class="card-body">
+        <h5 class="card-title">{{item.item.name}}</h5>
+        <p class="card-text">{{item.item.category}}</p>
+        <p class="card-text">{{item.item.quantity}} CTN</p>
+
+        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+       
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+	
+</div>
+
+{% endblock main %}
