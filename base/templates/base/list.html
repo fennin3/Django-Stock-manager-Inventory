@@ -3,8 +3,11 @@
 
 {% block main %}
 
-<h4 class="h4_head">Products to be ordered</h4> 
+<h4 class="h4_head" >Products to be ordered</h4> 
 <hr>
+{% if order.items.all.count < 1 %}
+<h5 style="text-align: center;">No Order Item!</h5>
+{% endif %}
 <div class="row ml-5 mr-5 mt-5">
   {% for item in order.items.all %}
   <div class="col-sm-2">

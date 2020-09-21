@@ -18,15 +18,20 @@
 				<div class="card-body">
 					<h5 class="card-title">{{product.name}}</h5>
 					<small>Category <span style="font-weight: bolder;">-></span> {{product.category}}</small><br>
-					<small class="card-text">Cost Price <span style="font-weight: bolder;">-></span> Ghc {{product.cost_price}}</small><br>
-					<small class="card-text">Selling Price <span style="font-weight: bolder;">-></span> Ghc {{product.selling_price}}</small><br>
+					<small class="card-text">Carton Price <span style="font-weight: bolder;">-></span> Ghc {{product.carton_price}}</small><br>
+					<small class="card-text">Carton Quantity <span style="font-weight: bolder;">-></span> {{product.quantity}} CTN</small><br>
+					<hr>
+					<small class="card-text">Unit Price <span style="font-weight: bolder;">-></span> Ghc {{product.unit_price}}</small><br>
+					<small class="card-text">Unit quantity <span style="font-weight: bolder;">-></span> {{product.unit_quantity}} PCS</small><br>
+					<small class="card-text">Profit <span style="font-weight: bolder;">-></span> Ghc {{product.get_profit}}</small>
+
+					<hr>
 					<small class="card-text">Status
 					{% if product.get_status %}
 						<span style="font-weight: bolder; ">-></span> <span style="color: green; font-weight: bolder; font-size: 17px;">Available</span></small><br>
 					{% else %}
 					<span style="font-weight: bolder; ">-></span> <span style="color: red; font-weight: bolder; font-size: 17px;">Not Available</span></small><br>
 					{% endif %}
-					<small class="card-text">Quantity <span style="font-weight: bolder;">-></span> {{product.quantity}}</small><br>
 					<hr>
 					{% comment %} <small class="mb-1">Edit Quantity</small> {% endcomment %}
 					<div class="row">

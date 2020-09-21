@@ -8,13 +8,18 @@
 <h4 class="h4_head">Orders Taken from the WareHouse</h4> 
 <hr>
 <div class="row ml-5 mr-5 mt-5">
+  {% if ordered_orders.count  < 1%}
+  <h5 class="h4_head" style="text-align: center; margin-left: auto; margin-right: auto;">No Ordered Item!</h5> 
+  {% else %}
   {% for item in ordered_orders %}
   <div class="col-sm-4">
     <a href="{% url 'orderdetail' item.id %}" style="color: black; text-decoration: none;">
     <div class="card shadow">
       <div class="card-body">
         <h5 class="card-title">{{item.ordered_date}}</h5>
-        <p class="card-text">Products -> {{item.items.count}}</p>
+        <p class="card-text">Products -> {{item.total_products}}</p>
+        <p class="card-text">Profit -> {{item.order_profit}}</p>
+
         <a href="{% url 'orderconfirm' item.id %}"><i class="fas fa-trash prodicon" style="color: red;"></i></a>
 
         <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
@@ -26,6 +31,7 @@
   {% endfor %}
   
 
+  {% endif %}
 
 </div>
     

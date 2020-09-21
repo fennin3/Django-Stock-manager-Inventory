@@ -11,6 +11,9 @@ from django.contrib import messages
 
 @login_required
 def home(request):
+    order_jan = Order.objects.filter(ordered_date__month=9)
+    for i in order_jan:
+        print(i.ordered_date)
     cat = Category.objects.filter(owner=request.user)
     prod = Product.objects.filter(owner=request.user)
 
@@ -26,6 +29,7 @@ def product(request):
     noc = len(products)
     productfilter = ProductFilter(request.GET, queryset=products)
     products = productfilter.qs
+    
     context = {
         'noc':noc,
         'products':products,
@@ -144,6 +148,17 @@ def sub_prod_quantity(request, id):
     prod = get_object_or_404(Product, id=id)
     
     n = request.POST.get('sub')
+
+    try:
+        a = int(n) + 0
+        print("Number")
+
+    except Exception:
+        print("Not Numeric")
+        n = 0
+
+        messages.info(request, "Invalid Input!")
+        return redirect('product')
     
     prod.quantity = prod.remove_quantity(n)
     prod.save()
@@ -153,9 +168,12 @@ def sub_prod_quantity(request, id):
 		user=request.user,
         ordered=False
 		)
+  
     try:
-        order_item.quantity = int(n)
-        order_item.save()
+        if order_item.quantity == 0:
+            if n.isnumeric():
+                order_item.quantity = int(n)
+                order_item.save()
     except Exception as e:
         print(e)
     order_qs = Order.objects.filter(user=request.user, ordered=False)
@@ -164,11 +182,18 @@ def sub_prod_quantity(request, id):
         order = order_qs[0]
         #check if order item is in the order
         if order.items.filter(item__id=item.id).exists():
-            order_item.quantity += int(n)
-            order_item.save()
-            messages.info(request, "Item quantity updated!")
-            return redirect('product')
+            try:
+                if n != "":
+                    order_item.quantity += int(n)
+                    order_item.save()
+                    messages.info(request, "Item quantity updated!")
+                    return redirect('product')
+                else:
+                    messages.error("Can't add an alphabet or Null as  a quantity!")
 
+            except Exception:
+                messages.error(request, "Try again!")
+                return redirect()
 
         else:
             order.items.add(order_item)
