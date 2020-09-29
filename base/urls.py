@@ -25,6 +25,8 @@ urlpatterns = [
     path('ordered/delete-confirm/<int:id>/', views.orderdeleteconfirm, name="orderconfirm"),
     path('categories/delete-confirm/<int:id>/', views.cat_delete_confirm, name="delete_confirm"),
     path("categories/delete/<int:id>/", views.catdelete, name="delete_cat"),
+    path('chartdata/', views.chartData, name="chartdata"),
+
 
 
 ]

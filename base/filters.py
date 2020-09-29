@@ -16,7 +16,7 @@ class ProductFilter(django_filters.FilterSet):
 
 
 class CategoryFilter(django_filters.FilterSet):
-	name = CharFilter(field_name='name', lookup_expr="icontains", label='Product Name')
+	name = CharFilter(field_name='name', lookup_expr="icontains", label='Category Name')
 	# tags = django_filters.ModelMultipleChoiceFilter(queryset=Tag.objects.all(),
 	# 	widget=forms.CheckboxSelectMultiple
 	# 	)

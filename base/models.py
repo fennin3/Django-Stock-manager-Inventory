@@ -105,11 +105,32 @@ class Order(models.Model):
     items = models.ManyToManyField(Item)
     ordered_date = models.DateTimeField(auto_now_add=True)
     ordered = models.BooleanField(default=False)
+    order_profit = models.DecimalField(max_digits=9, default=0.0, decimal_places=2)
+    year_month = models.CharField(max_length=100, null=True, blank=True)
+    
 
     def __str__(self):
-        return f"{self.user.username} order "
+        return f"{self.user.username}'s order "
 
-    def order_profit(self):
+
+    def save(self, *args, **kwargs):
+        if self.id:
+            total = 0
+            for item in self.items.all():
+                total += item.get_profit()
+            self.order_profit = total
+
+            self.year_month = self.ordered_date.strftime("%Y%m")
+    
+
+
+        
+
+        return super().save(*args, **kwargs)
+
+    
+
+    def order_profit_m(self):
         total = 0
         for item in self.items.all():
             total += item.get_profit()

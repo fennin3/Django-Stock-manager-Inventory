@@ -18,7 +18,7 @@
       <div class="card-body">
         <h5 class="card-title">{{item.ordered_date}}</h5>
         <p class="card-text">Products -> {{item.total_products}}</p>
-        <p class="card-text">Profit -> {{item.order_profit}}</p>
+        <p class="card-text">Profit -> GHC {{item.order_profit}}</p>
 
         <a href="{% url 'orderconfirm' item.id %}"><i class="fas fa-trash prodicon" style="color: red;"></i></a>
 

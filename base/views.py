@@ -7,13 +7,14 @@ from .forms import ProductAddForm, CategoryAddForm
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
+from django.db.models.functions import TruncMonth
+from django.db.models import Avg, Count, Min, Sum
+from django.http import JsonResponse
+from django.core import serializers
 
 
 @login_required
 def home(request):
-    order_jan = Order.objects.filter(ordered_date__month=9)
-    for i in order_jan:
-        print(i.ordered_date)
     cat = Category.objects.filter(owner=request.user)
     prod = Product.objects.filter(owner=request.user)
 
@@ -22,6 +23,29 @@ def home(request):
         'prod':prod
     }
     return render(request, "base/home.html", context)
+
+
+
+def chartData(request):
+    try:
+        data = Order.objects.values_list('year_month').annotate(price_sum=Sum("order_profit")).filter(user=request.user)
+        order = Order.objects.filter(ordered=True)
+        chartdata = []
+        # a = ['a','b','c','d']
+        # b = [10,20,30,40]
+
+
+        for i in data:
+            chartdata.append({i[0]:int(i[1])})
+
+        # for i,j in zip(a,b):
+        #     chartdata.append({i:j})
+
+        return JsonResponse(chartdata, safe=False)
+    except Exception:
+        chartdata = []
+        return JsonResponse(chartdata, safe=False)
+
 
 
 def product(request):
@@ -164,9 +188,9 @@ def sub_prod_quantity(request, id):
     prod.save()
     item = get_object_or_404(Product, id=id)
     order_item, created = Item.objects.get_or_create(
-		item=item,
 		user=request.user,
-        ordered=False
+        ordered=False,
+        item=item
 		)
   
     try:

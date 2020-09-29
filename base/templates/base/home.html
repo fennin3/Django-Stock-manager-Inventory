@@ -2,9 +2,11 @@
 {% load static %}
 {% load cart_template_tags %}
 {% block main %}
+	<script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<h3 class="h3_head">Overview</h3>
     			<hr>
-    			<div class="row">
+    			{% comment %} <div class="row">
 				  <div class="col-sm-6" >
 				    <div class="card shadow" style="height: 400px;">
 				      <div class="card-body">
@@ -23,7 +25,8 @@
 				      </div>
 				    </div>
 				  </div>
-				</div>
+				</div> {% endcomment %}
+				<div id="myChart" class="mb-5"></div>
 				
 				<div class="row">
 				  <div class="col-sm-6">
@@ -52,4 +55,61 @@
 				    </div>
 				  </div>
 				</div>
+
+				
+				<script>
+
+	var state ={	
+		'items':[],
+		'values':[],
+	}
+
+
+
+	var dataURL = `/chartdata/`
+	$.ajax({
+		method:'GET',
+		url:dataURL,
+		success:function(response){
+			console.log('RESPONSE:', response)
+			for (var i in response){
+
+				var key = Object.keys(response[i])[0]
+				var value = Object.values(response[i])[0]
+
+				state.items.push(key)
+				state.values.push(value)
+			}
+
+			console.log('STATE:', state)
+			buildChart()
+
+		}
+	})
+
+	function buildChart(){
+			var chartData = {
+			"type":"bar",
+			"scale-x":{
+				"values":state.items
+			},
+			"series":[
+				{
+					"values":state.values
+				}
+			]
+		}
+
+
+		zingchart.render({
+		  id: "myChart",
+		  data: chartData,
+		});
+	}
+	
+
+
+	
+</script>
+
 {% endblock main %}
