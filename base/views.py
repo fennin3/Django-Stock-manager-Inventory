@@ -46,12 +46,17 @@ def chartData(request):
         return JsonResponse(chartdata, safe=False)
 
 
-
+@login_required
 def product(request):
-    products = Product.objects.filter(owner=request.user)
-    noc = len(products)
-    productfilter = ProductFilter(request.GET, queryset=products)
-    products = productfilter.qs
+    try:
+        products = Product.objects.filter(owner=request.user)
+        noc = len(products)
+        productfilter = ProductFilter(request.GET, queryset=products)
+        products = productfilter.qs
+    except Exception:
+        products =""
+        noc=""
+        productfilter = ''
     
     context = {
         'noc':noc,
@@ -60,6 +65,8 @@ def product(request):
     }
     return render(request, "base/products_page.html", context)
 
+
+@login_required
 def category(request):
     categories = Category.objects.filter(owner=request.user)
     noc = len(categories)
@@ -77,7 +84,7 @@ def category(request):
 def signin(request):
     return render(request, 'converter/login.html')
 
-
+@login_required
 def orders(request):
     ordered_orders = Order.objects.filter(ordered=True, user=request.user).order_by('-ordered_date')
     context ={
@@ -88,7 +95,7 @@ def orders(request):
     
 
 
-
+@login_required
 def list(request):
     try:
         order = Order.objects.get(user=request.user, ordered=False)
@@ -99,7 +106,7 @@ def list(request):
     except ObjectDoesNotExist:
         return redirect('home')
 
-
+@login_required
 def prodadd_request(request):
     if request.method == 'POST':
         form = ProductAddForm(request.POST)
@@ -115,7 +122,7 @@ def prodadd_request(request):
     return render(request, 'base/addproduct.html', {'form':form})
 
 
-
+@login_required
 def catadd_request(request):
     if request.method == 'POST':
         form = CategoryAddForm(request.POST)
@@ -271,7 +278,7 @@ def edit_category(request, id):
 
 
 
-
+@login_required
 def ordered(request, id):
     order = get_object_or_404(Order, id=id)
     order.ordered = True
