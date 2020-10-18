@@ -1,6 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect, HttpResponseRedirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
 from .models import Product, Category, Item, Order, ItemsOut
 from .filters import ProductFilter, CategoryFilter
 from .forms import ProductAddForm, CategoryAddForm
@@ -80,7 +79,7 @@ def signin(request):
 
 
 def orders(request):
-    ordered_orders = Order.objects.filter(ordered=True, user=request.user)
+    ordered_orders = Order.objects.filter(ordered=True, user=request.user).order_by('-ordered_date')
     context ={
         'ordered_orders':ordered_orders
     }

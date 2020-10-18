@@ -22,4 +22,4 @@ class CategoryFilter(django_filters.FilterSet):
 	# 	)
 	class Meta:
 		model = Category
-		fields = ['name']
+		fields = ['name',]
